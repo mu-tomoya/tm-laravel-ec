@@ -2,9 +2,9 @@
     
     $s3_url = env('AWS_S3_URL');
     if ($type === 'shops') {
-        $path = '/shops/';
+        $path = 'shops/';
     } elseif ($type === 'products') {
-        $path = '/products/';
+        $path = 'products/';
     }
     
 @endphp
