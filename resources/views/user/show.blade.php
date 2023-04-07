@@ -132,5 +132,5 @@
             </div>
         </div>
     </div>
-    @vite(['resources/js/swiper.js', 'resources/css/swiper.css'])
+    @vite('resources/js/swiper.js')
 </x-app-layout>
