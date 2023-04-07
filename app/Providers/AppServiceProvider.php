@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (env("APP_ENV") == "production") {
+            $url->forceScheme('https');
+        }
         // ownerから始まるURL
         if (request()->is('owner*')) {
             config(['session.cookie' => config('session.cookie_owner')]);
@@ -32,6 +35,5 @@ class AppServiceProvider extends ServiceProvider
         if (request()->is('admin*')) {
             config(['session.cookie' => config('session.cookie_admin')]);
         }
-
     }
 }
