@@ -24,22 +24,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('owner.welcome');
-// });
 
-Route::prefix('shops')->
-    middleware('auth:owners')->group(function(){
-        Route::get('index', [ShopController::class, 'index'])->name('shops.index');
-        Route::get('edit/{shop}', [ShopController::class, 'edit'])->name('shops.edit');
-        Route::post('update/{shop}', [ShopController::class, 'update'])->name('shops.update');
+Route::prefix('shops')->middleware('auth:owners')->group(function () {
+    Route::get('index', [ShopController::class, 'index'])->name('shops.index');
+    Route::get('edit/{shop}', [ShopController::class, 'edit'])->name('shops.edit');
+    Route::post('update/{shop}', [ShopController::class, 'update'])->name('shops.update');
 });
 
 Route::resource('images', ImageController::class)
-->middleware('auth:owners')->except(['show']);
+    ->middleware('auth:owners')->except(['show']);
 
 Route::resource('products', ProductController::class)
-->middleware('auth:owners')->except(['show']);
+    ->middleware('auth:owners')->except(['show']);
 
 
 Route::get('/dashboard', function () {
@@ -47,55 +43,48 @@ Route::get('/dashboard', function () {
 })->middleware(['auth:owners'])->name('dashboard');
 
 
-// Route::get('/register', [RegisteredUserController::class, 'create'])
-//                 ->middleware('guest')
-//                 ->name('register');
-
-// Route::post('/register', [RegisteredUserController::class, 'store'])
-//                 ->middleware('guest');
-
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
-                ->middleware('guest')
-                ->name('login');
+    ->middleware('guest')
+    ->name('login');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-                ->middleware('guest');
+    ->middleware('guest');
 
 Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
-                ->middleware('guest')
-                ->name('password.request');
+    ->middleware('guest')
+    ->name('password.request');
 
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
-                ->middleware('guest')
-                ->name('password.email');
+    ->middleware('guest')
+    ->name('password.email');
 
 Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
-                ->middleware('guest')
-                ->name('password.reset');
+    ->middleware('guest')
+    ->name('password.reset');
 
 Route::post('/reset-password', [NewPasswordController::class, 'store'])
-                ->middleware('guest')
-                ->name('password.update');
+    ->middleware('guest')
+    ->name('password.update');
 
 Route::get('/verify-email', [EmailVerificationPromptController::class, '__invoke'])
-                ->middleware('auth:owners')
-                ->name('verification.notice');
+    ->middleware('auth:owners')
+    ->name('verification.notice');
 
 Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
-                ->middleware(['auth:owners', 'signed', 'throttle:6,1'])
-                ->name('verification.verify');
+    ->middleware(['auth:owners', 'signed', 'throttle:6,1'])
+    ->name('verification.verify');
 
 Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-                ->middleware(['auth:owners', 'throttle:6,1'])
-                ->name('verification.send');
+    ->middleware(['auth:owners', 'throttle:6,1'])
+    ->name('verification.send');
 
 Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
-                ->middleware('auth:owners')
-                ->name('password.confirm');
+    ->middleware('auth:owners')
+    ->name('password.confirm');
 
 Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store'])
-                ->middleware('auth:owners');
+    ->middleware('auth:owners');
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->middleware('auth:owners')
-                ->name('logout');
+    ->middleware('auth:owners')
+    ->name('logout');
