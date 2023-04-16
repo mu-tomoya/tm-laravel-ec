@@ -116,10 +116,10 @@ class CartController extends Controller
         $products = CartService::getItemsInCart($items);
         $user = User::findOrFail(Auth::id());
 
-        SendThanksMail::dispatch($products, $user);
+        /*         SendThanksMail::dispatch($products, $user);
         foreach ($products as $product) {
             SendOrderedMail::dispatch($product, $user);
-        }
+        } */
         // dd('ユーザーメール送信テスト');
         ////
         Cart::where('user_id', Auth::id())->delete();

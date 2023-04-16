@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if (env("APP_ENV") == "product") {
             $url->forceScheme('https');
+            $this->app['request']->server->set('HTTPS', 'on');
         }
         // ownerから始まるURL
         if (request()->is('owner*')) {
