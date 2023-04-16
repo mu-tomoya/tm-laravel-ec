@@ -97,7 +97,7 @@
                     <div class="mb-4 text-center">
                         @if ($product->shop->filename !== null)
                             <img class="mx-auto w-40 h-40 object-cover rounded-full"
-                                src="{{ asset('storage/shops/' . $product->shop->filename) }}">
+                                src="{{ env('APP_URL') . 'storage/shops/' . $product->shop->filename }}">
                         @else
                             <img src="">
                         @endif

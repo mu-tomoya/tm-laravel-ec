@@ -21,7 +21,11 @@ class ImageService
     $extension = $file->extension();
     $fileNameToStore = $fileName . '.' . $extension;
     $resizedImage = InterventionImage::make($file)->resize(1920, 1080)->encode();
-    Storage::disk('s3')->put('public/' . $folderName . '/' . $fileNameToStore, $resizedImage);
+    if (env('APP_ENV') == "product") {
+      Storage::disk('s3')->put('public/' . $folderName . '/' . $fileNameToStore, $resizedImage);
+    } else {
+      Storage::put('public/' . $folderName . '/' . $fileNameToStore, $resizedImage);
+    }
 
     return $fileNameToStore;
   }
