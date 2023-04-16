@@ -32,10 +32,9 @@
                         <div class="w-1/4 p-2 md:p-4">
                             <div class="border rounded-md p-2 md:p-4">
                                 <img class="image" data-id="{{ $name }}_{{ $image->id }}"
-                                    data-file="{{ $image->filename }}"
-                                    data-path="{{ env('AWS_S3_URL') . 'storage/products/' }}"
+                                    data-file="{{ $image->filename }}" data-path="{{ env('AWS_S3_URL') . 'products/' }}"
                                     data-modal="{{ $modal }}"
-                                    src="{{ env('AWS_S3_URL') . 'storage/products/' . $image->filename }}">
+                                    src="{{ env('AWS_S3_URL') . 'products/' . $image->filename }}">
                                 <div class="text-gray-700">{{ $image->title }}</div>
                             </div>
                         </div>
@@ -55,7 +54,7 @@
     <a class="py-2 px-4 bg-gray-200" data-micromodal-trigger="{{ $modal }}" href='javascript:;'>ファイルを選択</a>
     <div class="w-1/4">
         <img id="{{ $name }}_thumbnail"
-            @if ($cImage) src="{{ env('AWS_S3_URL') . 'storage/products/' . $cImage }}" @else src="" @endif
+            @if ($cImage) src="{{ env('AWS_S3_URL') . 'products/' . $cImage }}" @else src="" @endif
             src="">
     </div>
 </div>
